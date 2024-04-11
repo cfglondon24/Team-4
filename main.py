@@ -4,7 +4,7 @@ from consumable import Consumable
 
 
 pygame.init()
-width = 800 
+width = 800
 height = 600
 bounds = (width, height)
 window = pygame.display.set_mode(bounds)
@@ -17,7 +17,7 @@ font = pygame.font.SysFont('comicsans',60, True)
 timestep = 100
 multiplier = 1
 snake_height_origin = height/2
-snake_height = snake_height_origin 
+snake_height = snake_height_origin
 
 run = True
 while run:
@@ -28,7 +28,7 @@ while run:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       run = False
-  
+
   mouseheight = pygame.mouse.get_pos()[1]
   movement = snake_height - mouseheight
   keys = pygame.key.get_pressed()
@@ -42,10 +42,11 @@ while run:
     snake.steer(Direction.DOWN)
   elif snake_height == mouseheight:
     snake.stop()
-    
+
   snake_height = snake.body[1][1]
 
   snake.move()
+  consumable.spawn()
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
   if consumable.is_collided_with(snake):
