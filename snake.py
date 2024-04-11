@@ -63,27 +63,16 @@ class Snake:
       self.direction = direction
 
 
+''' don't need these 2 I think?
   def eat(self):
-    self.length += 1
+    # TODO apply effect of consumable
 
-  def check_for_food(self, food):
+  def check_for_consumables(self, consumable):
     head = self.body[-1]
-    if head[0] == food.x and head[1] == food.y:
+    if head[0] == consumable.x and head[1] == consumable.y:
       self.eat()
-      food.respawn()
-
-
-  def check_tail_collision(self):
-    head = self.body[-1]
-    has_eaten_tail = False
-
-    for i in range(len(self.body) - 1):
-      segment = self.body[i]
-      if head[0] == segment[0] and head[1] == segment[1]:
-        has_eaten_tail = True
-
-    return has_eaten_tail
-
+      consumable.spawn()
+'''
 
   def check_bounds(self):
     head = self.body[-1]
@@ -98,6 +87,7 @@ class Snake:
         return True
 
     return False
+
   
   def stop(self):
     pass
