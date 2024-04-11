@@ -24,8 +24,8 @@ class Snake:
 
   def respawn(self):
     self.length = 3
-    self.body = [(20,20),(20,40),(20,60)]
-    self.direction = Direction.DOWN
+    self.body = [(60,20),(40,20),(20,20)]
+    self.direction = Direction.RIGHT
 
 
   def draw(self, game, window):
@@ -75,3 +75,18 @@ class Snake:
         return True
 
     return False
+
+  
+  def stop(self):
+    pass
+
+''' don't need these 2 I think?
+  def eat(self):
+    # TODO apply effect of consumable
+
+  def check_for_consumables(self, consumable):
+    head = self.body[-1]
+    if head[0] == consumable.x and head[1] == consumable.y:
+      self.eat()
+      consumable.spawn()
+'''

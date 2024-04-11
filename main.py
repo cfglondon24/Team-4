@@ -4,7 +4,9 @@ from consumable import Consumable
 
 
 pygame.init()
-bounds = (300,300)
+width = 800 
+height = 600
+bounds = (width, height)
 window = pygame.display.set_mode(bounds)
 pygame.display.set_caption("Septic Shock")
 
@@ -14,6 +16,8 @@ consumable = Consumable(block_size,bounds)
 font = pygame.font.SysFont('comicsans',60, True)
 timestep = 100
 multiplier = 1
+snake_height_origin = height/2
+snake_height = snake_height_origin 
 
 run = True
 while run:
@@ -24,16 +28,26 @@ while run:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       run = False
-
+  
+  mouseheight = pygame.mouse.get_pos()[1]
+  movement = snake_height - mouseheight
   keys = pygame.key.get_pressed()
   if keys[pygame.K_LEFT]:
     snake.steer(Direction.LEFT)
   elif keys[pygame.K_RIGHT]:
     snake.steer(Direction.RIGHT)
-  elif keys[pygame.K_UP]:
+  elif movement > 0:
     snake.steer(Direction.UP)
-  elif keys[pygame.K_DOWN]:
+  elif movement < 0:
     snake.steer(Direction.DOWN)
+  elif snake_height == mouseheight:
+    snake.stop()
+    
+  snake_height = snake.body[1][1]
+
+  snake.move()
+  snake.check_for_food(food)
+
 
   snake.move()
   consumable.spawn()
