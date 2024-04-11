@@ -19,7 +19,7 @@ run = True
 while run:
   pygame.time.delay(timestep)
 
-  # TODO scroll background — shift everything left by a number of pixels
+  # TODO scroll background — shift consumable left by a number of pixels
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
@@ -36,12 +36,13 @@ while run:
     snake.steer(Direction.DOWN)
 
   snake.move()
+  consumable.spawn()
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
   if consumable.is_collided_with(snake):
-      if consumable.effect = 'increase multiplier':
+      if consumable.effect == 'increase multiplier':
           multiplier += 0.1
-      elif consumable.effect = 'decrease multiplier':
+      elif consumable.effect == 'decrease multiplier':
           multiplier -= 0.1
       else:
           pass
@@ -51,7 +52,6 @@ while run:
     window.blit(text, (20,120))
     pygame.display.update()
     pygame.time.delay(1000)
-    consumable.spawn()
 
   window.fill((0,0,0))
   snake.draw(pygame, window)
