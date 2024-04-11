@@ -38,8 +38,10 @@ def main():
       snake1Image = pygame.transform.scale(snake1Image , (200,100))
       count+=1
       timer = timer % 1000
+      consumable_exists = False
     else:
       count = count % len(image_array)
+
     
     pygame.time.delay(timestep)
     for event in pygame.event.get():

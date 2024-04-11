@@ -22,7 +22,7 @@ class Consumable:
 
     def spawn(self):
         effect = 'increase multiplier' if random.choice([True, False]) else 'decrease multiplier'
-        self.x = random.randint(0, self.blocks_in_width - 1) * self.block_size
+        self.x = random.randint(20, self.blocks_in_width - 1) * self.block_size
         self.y = random.randint(0, self.blocks_in_height - 1) * self.block_size
 
     # TODO hardcore different effects here (default: increasing multiplier)
