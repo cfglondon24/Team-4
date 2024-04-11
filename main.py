@@ -20,6 +20,7 @@ def main():
   timestep = 100
   multiplier = 1
   consumable_exists = True
+  bg_indent = 0
 
   run = True
   while run:
@@ -40,6 +41,7 @@ def main():
       snake.steer(Direction.DOWN)
 
     snake.move()
+    bg_indent += 1
 
     head = snake.body[-1]
 
@@ -71,6 +73,7 @@ def main():
     window.fill((0,0,0))
     snake.draw(pygame, window)
     consumable.draw(pygame, window)
+    window.blit(pygame.image.load('bg.jpg'), (-bg_indent, 0))
     window.blit(snake1Image,(snake.body[0][0],snake.body[0][1]), (0,0,200,200))
     pygame.display.update()
 
