@@ -46,7 +46,7 @@ while run:
   snake_height = snake.body[1][1]
 
   snake.move()
-  consumable.spawn()
+  #consumable.spawn()
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
   if consumable.is_collided_with(snake):
