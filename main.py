@@ -4,14 +4,20 @@ from food import Food
 
 
 pygame.init()
-bounds = (300,300)
+height = 600
+width = 800
+bounds = (width, height)
 window = pygame.display.set_mode(bounds)
-pygame.display.set_caption("Snake")
+pygame.display.set_caption("Septic Shock")
 
 block_size = 20
 snake = Snake(block_size, bounds)
 food = Food(block_size,bounds)
 font = pygame.font.SysFont('comicsans',60, True)
+
+
+snake_height_origin = height/2
+snake_height = snake_height_origin
 
 run = True
 while run:
@@ -21,19 +27,23 @@ while run:
     if event.type == pygame.QUIT:
       run = False
 
+  mouseheight = pygame.mouse.get_pos()[1]
+  movement = snake_height - mouseheight
   keys = pygame.key.get_pressed()
-  if keys[pygame.K_LEFT]:
-    snake.steer(Direction.LEFT)
-  elif keys[pygame.K_RIGHT]:
+  if keys[pygame.K_RIGHT]:
     snake.steer(Direction.RIGHT)
-  elif keys[pygame.K_UP]:
+  elif movement > 0:
     snake.steer(Direction.UP)
-  elif keys[pygame.K_DOWN]:
+  elif movement < 0:
     snake.steer(Direction.DOWN)
+  elif snake_height == mouseheight:
+    snake.steer(Direction.RIGHT)
     
   snake.move()
   snake.check_for_food(food)
-
+  
+  snake_height = snake.body[0][1]
+  
   if snake.check_bounds() == True or snake.check_tail_collision() == True:
     text = font.render('Game Over', True, (255,255,255))
     window.blit(text, (20,120))
