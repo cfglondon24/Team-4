@@ -25,10 +25,4 @@ class Consumable:
         self.x = random.randint(0, self.blocks_in_width - 1) * self.block_size
         self.y = random.randint(0, self.blocks_in_height - 1) * self.block_size
 
-    '''
-    def is_collided_with(self, sprite):
-        rect_consumable = pygame.Rect(left=self.x, top=self.y, width=self.block_size, height=self.block_size)
-        return self.rect.colliderect(sprite.rect)
-    '''
-
     # TODO hardcore different effects here (default: increasing multiplier)
