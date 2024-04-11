@@ -11,7 +11,8 @@ def main():
   bounds = (800,600)
   window = pygame.display.set_mode(bounds)
   pygame.display.set_caption("Snake")
-
+  snake1Image = pygame.image.load("snake_pngs\snake.png").convert_alpha()
+  snake1Image = pygame.transform.scale(snake1Image , (200,100))
   block_size = 20
   snake = Snake(block_size, bounds)
   food = Food(block_size,bounds)
@@ -49,6 +50,7 @@ def main():
     window.fill((0,0,0))
     snake.draw(pygame, window)
     food.draw(pygame, window)
+    window.blit(snake1Image,(snake.body[0][0],snake.body[0][1]), (0,0,200,200))
     pygame.display.update()
  
 pygame.init()
