@@ -12,7 +12,7 @@ class Snake:
   direction = None
   body = None
   block_size = None
-  color = (0,0,255)
+  color = (0,0,0)
   bounds = None
 
 
@@ -24,13 +24,13 @@ class Snake:
 
   def respawn(self):
     self.length = 3
-    self.body = [(60,20),(40,20),(20,20)]
-    self.direction = Direction.RIGHT
+    self.body = [(20,20),(20,40),(20,60)]
+    self.direction = Direction.DOWN
 
 
   def draw(self, game, window):
     for segment in self.body:
-      game.draw.rect(window, self.color, (segment[0],segment[1],self.block_size, self.block_size))
+      game.draw.circle(window, self.color, (segment[0]-self.block_size/2,segment[1]-self.block_size/2),self.block_size)
 
 
   def move(self):
@@ -47,7 +47,6 @@ class Snake:
     elif self.direction == Direction.LEFT:
       next_head = (curr_head[0] - self.block_size, curr_head[1])
       self.body.append(next_head)
-
     if self.length < len(self.body):
       self.body.pop(0)
 
@@ -57,10 +56,33 @@ class Snake:
       self.direction = direction
     elif self.direction == Direction.UP and direction != Direction.DOWN:
       self.direction = direction
-    elif self.direction == Direction.LEFT and direction != Direction.RIGHT:
+    elif self.direction == Direction.RIGHT and direction != Direction.RIGHT:
       self.direction = direction
-    elif self.direction == Direction.RIGHT and direction != Direction.LEFT:
+    elif self.direction == Direction.LEFT and direction != Direction.LEFT:
       self.direction = direction
+
+
+  def eat(self):
+    self.length += 1
+
+  def check_for_food(self, food):
+    head = self.body[-1]
+    if head[0] == food.x and head[1] == food.y:
+      self.eat()
+      food.respawn()
+
+
+  def check_tail_collision(self):
+    head = self.body[-1]
+    has_eaten_tail = False
+
+    for i in range(len(self.body) - 1):
+      segment = self.body[i]
+      if head[0] == segment[0] and head[1] == segment[1]:
+        has_eaten_tail = True
+
+    return has_eaten_tail
+
 
   def check_bounds(self):
     head = self.body[-1]
@@ -79,14 +101,3 @@ class Snake:
 
   def stop(self):
     pass
-
-''' don't need these 3 I think?
-  def eat(self):
-    # TODO apply effect of consumable
-
-  def check_for_consumables(self, consumable):
-    head = self.body[-1]
-    if head[0] == consumable.x and head[1] == consumable.y:
-      self.eat()
-      consumable.spawn()
-'''
