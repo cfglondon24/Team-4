@@ -5,8 +5,6 @@ from time import sleep
 import pygame_menu
 from pygame_menu import themes
 import webbrowser
-# import time
-
 
 
 def main():
@@ -14,7 +12,6 @@ def main():
                  "snake_pngs\snake_breathlessness.png", "snake_pngs/shaking_snake_slured.png", "snake_pngs/skin discoloration #1.png", 
                  "snake_pngs/shaking_snake_discoloured1.png", "snake_pngs/skin discoloration #2 final.png", "snake_pngs/shaking_snake_discoloured2.png", "snake_pngs/shaking_snake_discoloured2_breath.png"]
   count = 0
-  # start_time = time.time()
   pygame.init()
   bounds = (800,600)
   window = pygame.display.set_mode(bounds)
@@ -28,7 +25,7 @@ def main():
   font = pygame.font.SysFont('comicsans',60, True)
   timestep = 100
   multiplier = 1
-  consumable_exists = True
+  consumable_exists = False
   timer = 0
   run = True
   gametimer = pygame.time.get_ticks()
@@ -43,7 +40,8 @@ def main():
       timer = timer % 1000
     else:
       count = count % len(image_array)
-    pygame.time.delay(timestep * multiplier)
+    
+    pygame.time.delay(timestep)
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         run = False
@@ -90,11 +88,12 @@ def main():
       consumable.x -= block_size
 
     timer += pygame.time.get_ticks() - gametimer
+
     window.fill((0,0,0))
     snake.draw(pygame, window)
-    consumable.draw(pygame, window)
     window.blit(pygame.image.load('bg.jpg'), (-bg_indent, 0))
     window.blit(snake1Image,(snake.body[0][0],snake.body[0][1]), (0,0,200,200))
+    consumable.draw(pygame, window)
     pygame.display.update()
 
 pygame.init()
