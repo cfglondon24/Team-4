@@ -97,3 +97,7 @@ class Snake:
         return True
 
     return False
+
+
+  def stop(self):
+    pass
