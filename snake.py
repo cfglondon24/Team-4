@@ -1,4 +1,5 @@
 from enum import Enum
+import pygame
 
 class Direction(Enum):
   UP = 0
@@ -24,11 +25,13 @@ class Snake:
 
   def respawn(self):
     self.length = 3
-    self.body = [(60,20),(40,20),(20,20)]
+    self.body = [(60,300),(40,300),(20,300)]
     self.direction = Direction.RIGHT
 
 
   def draw(self, game, window):
+    self.body = pygame.image.load('snakes_png/shaking_snake.png').convert_alpha()
+    self.rect = self.image.get_rect()
     for segment in self.body:
       game.draw.rect(window, self.color, (segment[0],segment[1],self.block_size, self.block_size))
 
@@ -42,10 +45,7 @@ class Snake:
       next_head = (curr_head[0], curr_head[1] - self.block_size)
       self.body.append(next_head)
     elif self.direction == Direction.RIGHT:
-      next_head = (curr_head[0] + self.block_size, curr_head[1])
-      self.body.append(next_head)
-    elif self.direction == Direction.LEFT:
-      next_head = (curr_head[0] - self.block_size, curr_head[1])
+      next_head = (curr_head[0], curr_head[1])
       self.body.append(next_head)
 
     if self.length < len(self.body):
@@ -56,8 +56,6 @@ class Snake:
     if self.direction == Direction.DOWN and direction != Direction.UP:
       self.direction = direction
     elif self.direction == Direction.UP and direction != Direction.DOWN:
-      self.direction = direction
-    elif self.direction == Direction.LEFT and direction != Direction.RIGHT:
       self.direction = direction
     elif self.direction == Direction.RIGHT and direction != Direction.LEFT:
       self.direction = direction

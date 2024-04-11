@@ -31,19 +31,17 @@ while run:
 
   mouseheight = pygame.mouse.get_pos()[1]
   movement = snake_height - mouseheight
-  keys = pygame.key.get_pressed()
-  if keys[pygame.K_LEFT]:
-    snake.steer(Direction.LEFT)
-  elif keys[pygame.K_RIGHT]:
-    snake.steer(Direction.RIGHT)
-  elif movement > 0:
+  # keys = pygame.key.get_pressed()
+  # if keys[pygame.K_RIGHT]:
+  #   snake.steer(Direction.RIGHT)
+  if movement > 0:
     snake.steer(Direction.UP)
   elif movement < 0:
     snake.steer(Direction.DOWN)
   elif snake_height == mouseheight:
     snake.stop()
 
-  snake_height = snake.body[1][1]
+  snake_height = snake.body[0][1]
 
   snake.move()
   consumable.spawn()
@@ -66,5 +64,9 @@ while run:
 
   window.fill((0,0,0))
   snake.draw(pygame, window)
+  window.load
   consumable.draw(pygame, window)
+  snake_face = pygame.image.load('snake_pngs/snake.png')
+  window.blit(snake_face, (200,200))
+
   pygame.display.update()
