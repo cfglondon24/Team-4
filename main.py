@@ -10,7 +10,9 @@ import webbrowser
 
 
 def main():
-  image_array = ["snake_pngs\skin discoloration #1.png","snake_pngs\snake_slurred.png","snake_pngs\skin discoloration #2 final.png" , "snake_pngs/shaking_snake_discoloured2_breath.png" ]
+  image_array = ["snake_pngs\snake.png","snake_pngs\shaking_snake.png","snake_pngs\snake_slurred.png", 
+                 "snake_pngs\snake_breathlessness.png", "snake_pngs/shaking_snake_slured.png", "snake_pngs/skin discoloration #1.png", 
+                 "snake_pngs/shaking_snake_discoloured1.png", "snake_pngs/skin discoloration #2 final.png", "snake_pngs/shaking_snake_discoloured2.png", "snake_pngs/shaking_snake_discoloured2_breath.png"]
   count = 0
   # start_time = time.time()
   pygame.init()
@@ -33,7 +35,6 @@ def main():
 
   while run:
     gametimer = pygame.time.get_ticks()
-    print(count)
     if count < len(image_array) and timer > 1000:
       snake1Image = pygame.image.load(image_array[count]).convert_alpha()
       snake1Image = pygame.transform.scale(snake1Image , (200,100))
@@ -74,7 +75,6 @@ def main():
       consumable.spawn()
       consumable_exists = True
 
-    snake_height = snake.body[1][1]
 
     # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
 
