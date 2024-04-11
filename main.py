@@ -5,14 +5,14 @@ from time import sleep
 import pygame_menu
 from pygame_menu import themes
 import webbrowser
-import time 
+# import time 
 
 
 
 def main():
   image_array = ["snake_pngs\skin discoloration #1.png","snake_pngs\snake_slurred.png","snake_pngs\skin discoloration #2 final.png" , "snake_pngs/shaking_snake_discoloured2_breath.png" ]
   count = 0
-  start_time = time.time()
+  # start_time = time.time()
   pygame.init()
   bounds = (800,600)
   window = pygame.display.set_mode(bounds)
@@ -29,18 +29,19 @@ def main():
   consumable_exists = True
   timer = 0
   run = True
+  gametimer = pygame.time.get_ticks()
+
   while run:
-    pygame.time.Clock.tick()
-    timer += pygame.time.Clock.get_time()
-    if count < len(image_array) and timer%500 == 0:
+    gametimer = pygame.time.get_ticks()
+    print(count)
+    if count < len(image_array) and timer > 1000:
       snake1Image = pygame.image.load(image_array[count]).convert_alpha()
       snake1Image = pygame.transform.scale(snake1Image , (200,100))
       count+=1
+      timer = timer % 1000
     else:
-      count = 0
-
-    pygame.time.delay(100)
-
+      count = count % len(image_array)
+    pygame.time.delay(timestep)
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         run = False
@@ -84,7 +85,9 @@ def main():
       elif consumable.effect == 'decrease multiplier':
         multiplier -= 0.1
     else:
-      food.x -= block_size
+      consumable.x -= block_size
+    
+    timer += pygame.time.get_ticks() - gametimer
     window.fill((0,0,0))
     snake.draw(pygame, window)
     consumable.draw(pygame, window)
