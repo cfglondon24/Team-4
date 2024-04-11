@@ -5,7 +5,7 @@ from time import sleep
 import pygame_menu
 from pygame_menu import themes
 import webbrowser
-# import time 
+# import time
 
 
 
@@ -18,7 +18,7 @@ def main():
   window = pygame.display.set_mode(bounds)
   pygame.display.set_caption("Septic Shock")
   snake1Image = pygame.image.load("snake_pngs\snake.png").convert_alpha()
-  
+
   snake1Image = pygame.transform.scale(snake1Image , (200,100))
   block_size = 20
   snake = Snake(block_size, bounds)
@@ -30,10 +30,10 @@ def main():
   timer = 0
   run = True
   gametimer = pygame.time.get_ticks()
+  bg_indent = 0
 
   while run:
     gametimer = pygame.time.get_ticks()
-    print(count)
     if count < len(image_array) and timer > 1000:
       snake1Image = pygame.image.load(image_array[count]).convert_alpha()
       snake1Image = pygame.transform.scale(snake1Image , (200,100))
@@ -57,6 +57,7 @@ def main():
       snake.steer(Direction.DOWN)
 
     snake.move()
+    bg_indent += 1
 
     head = snake.body[-1]
 
@@ -86,11 +87,12 @@ def main():
         multiplier -= 0.1
     else:
       consumable.x -= block_size
-    
+
     timer += pygame.time.get_ticks() - gametimer
     window.fill((0,0,0))
     snake.draw(pygame, window)
     consumable.draw(pygame, window)
+    window.blit(pygame.image.load('bg.jpg'), (-bg_indent, 0))
     window.blit(snake1Image,(snake.body[0][0],snake.body[0][1]), (0,0,200,200))
     pygame.display.update()
 
