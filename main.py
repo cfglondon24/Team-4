@@ -62,6 +62,7 @@ while run:
     window.blit(text, (20,120))
     pygame.display.update()
     pygame.time.delay(1000)
+    consumable.spawn()
 
   window.fill((0,0,0))
   snake.draw(pygame, window)
