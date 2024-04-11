@@ -76,11 +76,11 @@ class Snake:
 
     return False
 
-  
+
   def stop(self):
     pass
 
-''' don't need these 2 I think?
+''' don't need these 3 I think?
   def eat(self):
     # TODO apply effect of consumable
 
