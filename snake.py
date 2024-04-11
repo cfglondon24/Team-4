@@ -62,18 +62,6 @@ class Snake:
     elif self.direction == Direction.RIGHT and direction != Direction.LEFT:
       self.direction = direction
 
-
-''' don't need these 2 I think?
-  def eat(self):
-    # TODO apply effect of consumable
-
-  def check_for_consumables(self, consumable):
-    head = self.body[-1]
-    if head[0] == consumable.x and head[1] == consumable.y:
-      self.eat()
-      consumable.spawn()
-'''
-
   def check_bounds(self):
     head = self.body[-1]
     if head[0] >= self.bounds[0]:
@@ -91,3 +79,14 @@ class Snake:
   
   def stop(self):
     pass
+
+''' don't need these 2 I think?
+  def eat(self):
+    # TODO apply effect of consumable
+
+  def check_for_consumables(self, consumable):
+    head = self.body[-1]
+    if head[0] == consumable.x and head[1] == consumable.y:
+      self.eat()
+      consumable.spawn()
+'''

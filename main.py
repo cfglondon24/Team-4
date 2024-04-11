@@ -53,9 +53,9 @@ while run:
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
   if consumable.is_collided_with(snake):
-      if consumable.effect = 'increase multiplier':
+      if consumable.effect == 'increase multiplier':
           multiplier += 0.1
-      elif consumable.effect = 'decrease multiplier':
+      elif consumable.effect == 'decrease multiplier':
           multiplier -= 0.1
       else:
           pass
