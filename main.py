@@ -46,11 +46,6 @@ while run:
   snake_height = snake.body[1][1]
 
   snake.move()
-  snake.check_for_food(food)
-
-
-  snake.move()
-  consumable.spawn()
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
   if consumable.is_collided_with(snake):
@@ -66,6 +61,7 @@ while run:
     window.blit(text, (20,120))
     pygame.display.update()
     pygame.time.delay(1000)
+    consumable.spawn()
 
   window.fill((0,0,0))
   snake.draw(pygame, window)
