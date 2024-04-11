@@ -41,7 +41,7 @@ def main():
       timer = timer % 1000
     else:
       count = count % len(image_array)
-    pygame.time.delay(timestep)
+    pygame.time.delay(timestep * multiplier)
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         run = False
