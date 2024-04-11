@@ -16,6 +16,7 @@ class Snake:
   bounds = None
 
 
+
   def __init__(self, block_size, bounds):
     self.block_size = block_size
     self.bounds = bounds
@@ -24,8 +25,8 @@ class Snake:
 
   def respawn(self):
     self.length = 3
-    self.body = [(20,20),(20,40),(20,60)]
-    self.direction = Direction.DOWN
+    self.body = [(20,300),(40,300),(60,300)]
+    self.direction = Direction.RIGHT
 
 
   def draw(self, game, window):
@@ -44,6 +45,9 @@ class Snake:
     elif self.direction == Direction.RIGHT:
       next_head = (curr_head[0] + self.block_size, curr_head[1])
       self.body.append(next_head)
+    elif self.direction == Direction.LEFT:
+      next_head = (curr_head[0], curr_head[1] + self.block_size)
+      self.body.append(next_head)
 
     if self.length < len(self.body):
       self.body.pop(0)
@@ -56,7 +60,8 @@ class Snake:
       self.direction = direction
     elif self.direction == Direction.RIGHT and direction != Direction.RIGHT:
       self.direction = direction
-
+    elif self.direction == Direction.LEFt and direction != Direction.LEFT:
+      self.direction = direction
 
   def eat(self):
     self.length += 1
@@ -66,19 +71,6 @@ class Snake:
     if head[0] == food.x and head[1] == food.y:
       self.eat()
       food.respawn()
-
-
-  def check_tail_collision(self):
-    head = self.body[-1]
-    has_eaten_tail = False
-
-    for i in range(len(self.body) - 1):
-      segment = self.body[i]
-      if head[0] == segment[0] and head[1] == segment[1]:
-        has_eaten_tail = True
-
-    return has_eaten_tail
-
 
   def check_bounds(self):
     head = self.body[-1]
