@@ -1,31 +1,29 @@
 import pygame
 from snake import *
 from food import Food
+from time import sleep
+import pygame_menu
+from pygame_menu import themes
+import webbrowser
 
+def main():
+  pygame.init()
+  bounds = (800,600)
+  window = pygame.display.set_mode(bounds)
+  pygame.display.set_caption("Snake")
 
-pygame.init()
-height = 600
-width = 800
-bounds = (width, height)
-window = pygame.display.set_mode(bounds)
-pygame.display.set_caption("Septic Shock")
+  block_size = 20
+  snake = Snake(block_size, bounds)
+  food = Food(block_size,bounds)
+  font = pygame.font.SysFont('comicsans',60, True)
 
-block_size = 20
-snake = Snake(block_size, bounds)
-food = Food(block_size,bounds)
-font = pygame.font.SysFont('comicsans',60, True)
+  run = True
+  while run:
+    pygame.time.delay(100)
 
-
-snake_height_origin = height/2
-snake_height = snake_height_origin
-
-run = True
-while run:
-  pygame.time.delay(100)
-
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      run = False
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        run = False
 
   # mouseheight = pygame.mouse.get_pos()[1]
   # movement = snake_height - mouseheight
@@ -58,8 +56,27 @@ while run:
     pygame.time.delay(1000)
     snake.respawn()
 
-  window.fill((0,0,0))
-  snake.draw(pygame, window)
-  food.draw(pygame, window)
-  
-  pygame.display.update()
+    window.fill((0,0,0))
+    snake.draw(pygame, window)
+    food.draw(pygame, window)
+    pygame.display.update()
+ 
+pygame.init()
+surface = pygame.display.set_mode((800, 600))
+ 
+def open_web():
+    webbrowser.open("https://sepsistrust.org/")
+ 
+def start_the_game():
+    main()
+ 
+ 
+ 
+mainmenu = pygame_menu.Menu('Welcome to Septic Shock', 600, 400, theme=themes.THEME_ORANGE)
+mainmenu.add.button('Play', start_the_game)
+mainmenu.add.button('Education', open_web)
+mainmenu.add.button('Quit', pygame_menu.events.EXIT)
+
+ 
+mainmenu.mainloop(surface)
+
