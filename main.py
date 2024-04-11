@@ -19,12 +19,9 @@ multiplier = 1
 snake_height_origin = height/2
 snake_height = snake_height_origin
 consumable_exists = True
-snake_touching_edge = False
 
 run = True
 while run:
-  print(snake.direction)
-
   pygame.time.delay(timestep)
 
   # TODO scroll background — shift consumable left by a number of pixels
@@ -82,7 +79,7 @@ while run:
 
   # TODO check for consumables — consumables themselves should have collision check, because they know which one they are, whereas snake doesn't
 
-  if head[0] == consumable.width and head[1] == consumable.height:
+  if head[0] == consumable.x and head[1] == consumable.y:
     consumable_exists = False
 
     if consumable.effect == 'increase multiplier':
@@ -91,11 +88,6 @@ while run:
       multiplier -= 0.1
     else:
       pass
-
-  if snake.check_bounds() == True:
-    snake_touching_edge = True
-    text = font.render('You Died', True, (255,255,255))
-    window.blit(text, (20,120))
 
   window.fill((0,0,0))
   snake.draw(pygame, window)
