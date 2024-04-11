@@ -44,9 +44,6 @@ class Snake:
     elif self.direction == Direction.RIGHT:
       next_head = (curr_head[0] + self.block_size, curr_head[1])
       self.body.append(next_head)
-    elif self.direction == Direction.LEFT:
-      next_head = (curr_head[0] - self.block_size, curr_head[1])
-      self.body.append(next_head)
 
     if self.length < len(self.body):
       self.body.pop(0)
@@ -57,9 +54,7 @@ class Snake:
       self.direction = direction
     elif self.direction == Direction.UP and direction != Direction.DOWN:
       self.direction = direction
-    elif self.direction == Direction.LEFT and direction != Direction.RIGHT:
-      self.direction = direction
-    elif self.direction == Direction.RIGHT and direction != Direction.LEFT:
+    elif self.direction == Direction.RIGHT and direction != Direction.RIGHT:
       self.direction = direction
 
 
