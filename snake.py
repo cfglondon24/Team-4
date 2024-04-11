@@ -24,8 +24,8 @@ class Snake:
 
   def respawn(self):
     self.length = 3
-    self.body = [(20,20),(20,40),(20,60)]
-    self.direction = Direction.DOWN
+    self.body = [(60,20),(40,20),(20,20)]
+    self.direction = Direction.RIGHT
 
 
   def draw(self, game, window):
@@ -98,3 +98,6 @@ class Snake:
         return True
 
     return False
+  
+  def stop(self):
+    pass
