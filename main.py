@@ -5,21 +5,37 @@ from time import sleep
 import pygame_menu
 from pygame_menu import themes
 import webbrowser
+import time 
+
+
 
 def main():
+  image_array = ["snake_pngs\skin discoloration #1.png","snake_pngs\snake_slurred.png","snake_pngs\skin discoloration #2 final.png" , "snake_pngs/shaking_snake_discoloured2_breath.png" ]
+  count = 0
+  start_time = time.time()
   pygame.init()
   bounds = (800,600)
   window = pygame.display.set_mode(bounds)
   pygame.display.set_caption("Snake")
   snake1Image = pygame.image.load("snake_pngs\snake.png").convert_alpha()
+  
   snake1Image = pygame.transform.scale(snake1Image , (200,100))
   block_size = 20
   snake = Snake(block_size, bounds)
   food = Food(block_size,bounds)
   font = pygame.font.SysFont('comicsans',60, True)
-
+  timer = 0
   run = True
   while run:
+    pygame.time.Clock.tick()
+    timer += pygame.time.Clock.get_time()
+    if count < len(image_array) and timer%500 == 0:
+      snake1Image = pygame.image.load(image_array[count]).convert_alpha()
+      snake1Image = pygame.transform.scale(snake1Image , (200,100))
+      count+=1
+    else:
+      count = 0
+
     pygame.time.delay(100)
 
     for event in pygame.event.get():
@@ -46,7 +62,8 @@ def main():
       pygame.time.delay(1000)
       snake.respawn()
       food.respawn()
-
+    else:
+      food.x -= block_size
     window.fill((0,0,0))
     snake.draw(pygame, window)
     food.draw(pygame, window)
